@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.daniel-hopae.TiltHologramCard"
+      "bundleIdentifier": "com.2ast.TiltHologramCard"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,10 +19,9 @@
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
-        "android.permission.HIGH_SAMPLING_RATE_SENSORS",
         "android.permission.HIGH_SAMPLING_RATE_SENSORS"
       ],
-      "package": "com.daniel_hopae.TiltHologramCard"
+      "package": "com.2ast.TiltHologramCard"
     },
     "web": {
       "bundler": "metro",
