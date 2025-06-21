@@ -125,7 +125,7 @@ For smooth 60fps animations on Android, add the high sampling rate permission:
 - Inspired by [Pokémon card interaction website](https://poke-holo.simey.me/) for the original holographic card concept
 - Heavily based on [React Native Shader Card](https://github.com/jerinjohnk/RNShaderCard) - the main technical foundation for this implementation
 - [Gyroscope hologram UI tweet](https://x.com/luciascarlet/status/1930614317541474598?s=46) for gyroscope-based interaction inspiration
-
+- Special thanks to Claude for the great help with writing the README.
 ---
 
 **Bring your cards to life with realistic holographic effects! 🌈✨**
