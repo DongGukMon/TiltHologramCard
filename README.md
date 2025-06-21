@@ -1,50 +1,131 @@
-# Welcome to your Expo app 👋
+# 🃏 TiltHologramCard
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native component that creates stunning holographic card effects using device gyroscope sensors. Inspired by the famous [Pokémon card interaction website](https://poke-holo.simey.me/) and [React Native Shader Card](https://github.com/jerinjohnk/RNShaderCard), this project brings real-time 3D tilt and hologram effects to mobile apps.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- 🎯 **Gyroscope-based 3D tilt effects** - Real-time device motion detection
+- 💎 **Dynamic hologram patterns** - Rainbow gradients with custom mask support
+- ✨ **Light reflection effects** - Realistic light movement across card surface
+- 🎮 **Smooth 60fps animations** - Optimized performance with React Native Reanimated
+- 📱 **Cross-platform support** - Works on both iOS and Android
 
-   ```bash
-   npm install
-   ```
+## 🎬 Demo
 
-2. Start the app
+### Step 1: Basic 3D Tilt Effect
+![Basic Tilt](./assets/gifs/1_tilt.gif)
 
-   ```bash
-   npx expo start
-   ```
+*Device gyroscope controls card rotation in 3D space*
 
-In the output, you'll find options to open the app in a
+### Step 2: Light Reflection
+![Light Effect](./assets/gifs/2_light.gif)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+*Dynamic light gradients move with card orientation*
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Step 3: Hologram Background
+![Hologram Background](./assets/gifs/3_hologram_backgorund.gif)
 
-## Get a fresh project
+*Rainbow gradient overlay creates holographic base effect*
 
-When you're ready, run:
+### Step 4: Pattern Masking
+![Pattern Mask](./assets/gifs/4_hologram_pattern_mask.gif)
+
+*Custom hologram pattern applied through image masking*
+
+### Step 5: Final Result
+![Final Result](./assets/gifs/5_hologram_light_mask.gif)
+
+*Complete hologram effect that responds to light and tilt*
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- Expo CLI
+- iOS/Android development environment
+
+### Installation
 
 ```bash
-npm run reset-project
+# Clone the repository
+git clone https://github.com/your-username/TiltHologramCard.git
+cd TiltHologramCard
+
+# Install dependencies
+npm install
+
+# Start the development server
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Android Setup
 
-## Learn more
+For smooth 60fps animations on Android, add the high sampling rate permission:
 
-To learn more about developing your project with Expo, look at the following resources:
+```json
+// app.json
+{
+  "expo": {
+    "android": {
+      "permissions": ["android.permission.HIGH_SAMPLING_RATE_SENSORS"]
+    }
+  }
+}
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🛠️ Technical Implementation
 
-## Join the community
+### Core Technologies
 
-Join our community of developers creating universal apps.
+- **[React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)** - Smooth 60fps animations
+- **[Expo Sensors](https://docs.expo.dev/versions/latest/sdk/gyroscope/)** - Gyroscope data access
+- **[React Native Skia](https://shopify.github.io/react-native-skia/)** - High-performance graphics rendering
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### How It Works
+
+1. **Gyroscope Integration**: Device motion data converted to rotation angles
+   ```tsx
+   rotateX.value = clamp(
+     rotateX.value + (gyroscopeData.x / 2) * dt * RAD2DEG,
+     -maxAngle, maxAngle
+   );
+   ```
+
+2. **3D Transforms**: Perspective and rotation applied to card container
+   ```tsx
+   transform: [
+     { perspective: 500 },
+     { rotateX: `${rotateX.value}deg` },
+     { rotateY: `${rotateY.value}deg` }
+   ]
+   ```
+
+3. **Dynamic Gradients**: Light effects calculated based on tilt angles
+   ```tsx
+   const gradientStart = useDerivedValue(() => ({
+     x: -width + (width/2 + (width/2) * (rotateY.value/maxAngle)),
+     y: -height + (height/2 + (height/2) * (rotateX.value/maxAngle))
+   }));
+   ```
+
+4. **Hologram Masking**: Luminance-based masking for realistic effects
+   ```tsx
+   <Mask mode="luminance" mask={lightGradient}>
+     <Image image={hologramPattern} />
+     <RainbowGradient />
+   </Mask>
+   ```
+
+
+
+
+## 🙏 Acknowledgments
+
+- Inspired by [Pokémon card interaction website](https://poke-holo.simey.me/) for the original holographic card concept
+- Heavily based on [React Native Shader Card](https://github.com/jerinjohnk/RNShaderCard) - the main technical foundation for this implementation
+- [Gyroscope hologram UI tweet](https://x.com/luciascarlet/status/1930614317541474598?s=46) for gyroscope-based interaction inspiration
+
+---
+
+**Bring your cards to life with realistic holographic effects! 🌈✨**
