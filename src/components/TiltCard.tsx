@@ -11,11 +11,11 @@ import {
   Canvas,
   DataSourceParam,
   Group,
+  Image,
   LinearGradient,
   Mask,
   RoundedRect,
   useImage,
-  Image,
 } from '@shopify/react-native-skia';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
@@ -72,7 +72,7 @@ export const TiltCard = ({
     <Group blendMode="overlay">
       <Mask
         mask={
-          <RoundedRect x={0} y={0} r={17} width={width} height={height}>
+          <RoundedRect x={0} y={0} r={12} width={width} height={height}>
             <LinearGradient
               start={gradientStart}
               end={gradientEnd}
@@ -153,13 +153,11 @@ export const TiltCard = ({
           {
             width,
             height,
-            borderRadius: 17,
-            overflow: 'hidden',
           },
         ]}
       >
         {hologramMaskSource ? renderHologramLayer() : null}
-        <RoundedRect x={0} y={0} r={17} width={width} height={height}>
+        <RoundedRect x={0} y={0} r={12} width={width} height={height}>
           <LinearGradient
             start={gradientStart}
             end={gradientEnd}
